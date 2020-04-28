@@ -1,12 +1,12 @@
-main: main.o scheduler.o process.o
-	gcc main.o scheduler.o process.o -o main
+main: ./src/main.o ./src/scheduler.o ./src/process.o
+	gcc ./src/main.o ./src/scheduler.o ./src/process.o -o main
 main.o: main.c Makefile
-	gcc main.c -c
+	gcc ./src/main.c -c
 scheduler.o: scheduler.c scheduler.h Makefile
-	gcc scheduler.c -c
+	gcc ./src/scheduler.c -c
 process.o: process.c process.h Makefile
-	gcc process.c -c
+	gcc ./src/process.c -c
 clean:
-	rm -rf *o
+	rm ./src/*o -rf
 run:
-	sudo ./main
+	sudo ./src/main
