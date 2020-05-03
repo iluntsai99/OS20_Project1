@@ -13,8 +13,9 @@ obj-y     = fork.o exec_domain.o panic.o \
 	    async.o range.o smpboot.o ucount.o
 
 obj-y += my_add.o
-obj-y += get_time.o
-obj-y += buffer_printk.o
+obj-y += my_print.o
+obj-y += my_get_time.o
+
 
 obj-$(CONFIG_MODULES) += kmod.o
 obj-$(CONFIG_MULTIUSER) += groups.o
