@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <sched.h>
+#include <time.h>
 #include <sys/syscall.h>
 #include <sys/wait.h>
 #include <sys/types.h>
@@ -14,7 +15,7 @@
 #define __NS 1000000000
 #define CHILD_CPU 1
 #define PARENT_CPU 0
-#define PRINTK 336
+#define PRINTK 334
 #define GET_TIME 335
 #define ll long long
 #define FIFO	0
@@ -33,14 +34,20 @@ typedef struct process{
 	pid_t pid;
 } p;
 
+typedef struct queue{
+	int start;
+	int last;
+	int _q[1010];
+}queue;
+
 int assign_core(int pid, int core); //Assign process to specific CPU
 int exec_proc(p proc); //Execute the process and return pid
 int set_priority(int pid, int p); //Set priority to a process (int pid), p = 1 means high priority, p = 0 means low priority 
 
 
 int cmp (const void *A, const void *B);
-int next_process(int policy, int num, p *processes);
+int next_process(int policy, int num, p *processes, queue *q);
 int FIFO_next(p *processes, int num);
 int SJF_next(p *processes, int num);
-int RR_next(p *processes, int num);
+int RR_next(p *processes, int num, queue *q);
 int scheduling(int sched_policy, int num, p *processes);
